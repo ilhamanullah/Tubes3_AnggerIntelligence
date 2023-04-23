@@ -1,0 +1,73 @@
+@font-face {
+  font-family: 'Poppins';
+  src: url('../public/font/Poppins-SemiBold.ttf');
+}
+
+.logo {
+  position: absolute;
+  width : 80px;
+  height : 80px;
+  top: 53px;
+  left: 32px;
+}
+
+.textlogo {
+  position: absolute;
+  top: 64px;
+  left: 120px;
+}
+
+.texthistory {
+  position: absolute;
+  top: 200px;
+  left: 32px;
+}
+
+.newchat{
+  background: #FFD698A8;
+  color : #FFFFFF;
+  width : 178px;
+  height : 59px;
+  border-radius: 10px;
+  position: absolute;
+  font-size: 20px;
+  top: 250px;
+  left: 78px;
+  font-family: 'Poppins';
+}
+
+.newchat:hover {
+  background: #f9dbafa8;
+  ;
+}
+
+.history{
+  background: #851C1280;
+  color : #FFFFFF;
+  outline-color: white;
+  width : 275px;
+  height : 58px;
+  border-radius: 10px;
+  position: absolute;
+  font-size: 20px;
+  left: 30px;
+  font-family: 'Poppins';
+}
+
+.history:hover {
+  background: #851C12;
+}
+
+.textinput {
+  position: absolute;
+  top: 650px;
+  left: 305px;
+  width: 1170px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 40px;
+  color: #FFFFFF80;
+  background: #FFFFFF80;
+
+}
+
