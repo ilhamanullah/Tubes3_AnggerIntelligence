@@ -8,8 +8,8 @@ function App() {
   
   const bgcolor = {
     backgroundColor: '#26225D',
-    width : 'w-auto',
-    height: 'h-auto',
+    height: '100vh',
+    width: '100vw',
     display : 'relative',
     top : '0px',
     left : '0px',
@@ -18,7 +18,7 @@ function App() {
   const sidebar = {
     backgroundColor: '#DC4E40',
     width: '275px',
-    height: '673px',
+    height: '95vh',
     display : 'relative',
     borderRadius: '10px',
     padding: '20px',
@@ -56,12 +56,14 @@ function App() {
         <label>
           <input
             type="radio"
-            name="option"
-            value="Option 1"
+            name="option-kmp"
+            value="KMP"
             checked={selectedOption === "Option 1"}
             onChange={() => handleOptionChange("Option 1")}
+            style={{ display: 'none' }}
           />
-          <span className="radio-dot"></span> KMP
+          <div className="radio-style" style={{top: "700px", left: "100px"}}></div>
+          <div className="KMP-text" style={{top:"713px", left: "150px"}}>KMP</div>
         </label>
 
         <label>
@@ -71,8 +73,10 @@ function App() {
             value="Option 2"
             checked={selectedOption === "Option 2"}
             onChange={() => handleOptionChange("Option 2")}
+            style={{ display: 'none' }}
           />
-          <span className="radio-dot"></span> BP
+          <span className="radio-style" style={{top: "730px",left: "73px"}}></span>
+          <div className="BM-text" style={{top:"744px", left: "150px"}}>BM</div>
         </label>
 
       </div>

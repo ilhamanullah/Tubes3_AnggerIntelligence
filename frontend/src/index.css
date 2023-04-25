@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+radio-kmp {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #999;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+}
