@@ -10,7 +10,7 @@ function App() {
     backgroundColor: '#26225D',
     height: '100%',
     width: '100%',
-    display : 'relative',
+    display : 'flex',
     top : '0px',
     left : '0px',
     position : 'fixed',
@@ -20,7 +20,7 @@ function App() {
     backgroundColor: '#DC4E40',
     width: '275px',
     height: '96vh',
-    display : 'relative',
+    display : 'flex',
     borderRadius: '10px',
     padding: '20px',
     top : '0px',
@@ -39,6 +39,15 @@ function App() {
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
+
+  const [messages, setMessages] = useState([]);
+
+  const handleSend = () => {
+    if (text !== "") {
+      setMessages([...messages, text]);
+      setText("");
+    }
+  }
   return (
     <div style = {bgcolor}> 
       <div style = {sidebar}>
@@ -92,7 +101,17 @@ function App() {
         />
       {/* <p>You typed: {text}</p> */}
       </label>
-      <button className="send" style={{top: "740px"}}> Send</button>
+      <button className="send" style={{top: "740px"}} onClick={handleSend}> Send</button>
+      
+      <div className = "chat-container" style={{ overflowY: "scroll" }}>
+      <div className="chatbox">
+        {messages.map((message, index) => (
+        <div key={index} className="chat-bubble" onClick={() => console.log(`Clicked on message ${index}`)}>
+          {message}
+        </div>
+        ))}
+        </div>
+      </div>
     </div>
   );
 }

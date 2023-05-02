@@ -61,8 +61,8 @@
 .textinput {
   position: absolute;
   top: 740px;
-  left: 305px;
-  width: 1140px;
+  left: 320px;
+  width: 1100px;
   height: 50px;
   border-radius: 10px;
   font-size: 40px;
@@ -128,14 +128,67 @@ input[type="radio"]:checked + .radio-style::before {
   font-family: 'Poppins';
   color: #FFFFFF;
   background: #DC4E40;
-  left: 1450px;
+  left: 1440px;
 }
 
 .input{
   position: absolute;
-  width: 1135px;
+  width: 1100px;
   height: 50px;
   border-radius: 10px;
   font-size: 20px;
   
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 500px; /* set a fixed height or use a percentage value */
+}
+
+.chat-bubble {
+  position: relative;
+  display: flex;
+  background-color: #FFFFFF;
+  color: #000000;
+  cursor: pointer;
+  font-family: 'Poppins';
+  top : 50px;
+  left : 310px;
+  max-width: 76%;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 10px;
+  align-self: flex-start;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 20px;
+  overflow-wrap: break-word;
+}
+
+.chat-bubble::before {
+  content: "";
+  position: absolute;
+  border-style: solid;
+  border-width: 10px 10px 0 0;
+  border-color: #DC4E40 transparent transparent transparent;
+  top: 0;
+  /* border-top-left-radius: 0%; */
+  left: 0;
+  /* bottom: -10px; */
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 700px;
+  top : 50px;
+  left : 500px;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
 }
