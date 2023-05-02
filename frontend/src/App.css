@@ -130,3 +130,12 @@ input[type="radio"]:checked + .radio-style::before {
   background: #DC4E40;
   left: 1450px;
 }
+
+.input{
+  position: absolute;
+  width: 1135px;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 20px;
+  
+}

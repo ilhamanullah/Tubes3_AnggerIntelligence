@@ -82,12 +82,13 @@ function App() {
       </div>
       <label className='textinput' htmlFor="text-input">
         <input
+          className='input'
           type="text"
           id="text-input"
           value={text}
           onChange={handleTextChange}
           placeholder="Type your text here"
-          
+
         />
       {/* <p>You typed: {text}</p> */}
       </label>
