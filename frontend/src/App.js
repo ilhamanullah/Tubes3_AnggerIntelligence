@@ -8,23 +8,24 @@ function App() {
   
   const bgcolor = {
     backgroundColor: '#26225D',
-    height: '100vh',
-    width: '100vw',
+    height: '100%',
+    width: '100%',
     display : 'relative',
     top : '0px',
     left : '0px',
+    position : 'fixed',
     
   }
   const sidebar = {
     backgroundColor: '#DC4E40',
     width: '275px',
-    height: '95vh',
+    height: '96vh',
     display : 'relative',
     borderRadius: '10px',
     padding: '20px',
     top : '0px',
     left : '-20px',
-    position : 'relative'
+    position : 'fixed'
   };
   
   const [selectedOption, setSelectedOption] = useState("");
@@ -38,7 +39,6 @@ function App() {
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
-
   return (
     <div style = {bgcolor}> 
       <div style = {sidebar}>
@@ -86,9 +86,12 @@ function App() {
           id="text-input"
           value={text}
           onChange={handleTextChange}
+          placeholder="Type your text here"
+          
         />
       {/* <p>You typed: {text}</p> */}
       </label>
+      <button className="send" style={{top: "740px"}}> Send</button>
     </div>
   );
 }
