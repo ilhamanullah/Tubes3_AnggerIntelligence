@@ -8,10 +8,12 @@ import (
 
 func distance(text string, pattern string) float32 {
 	dist := levenshtein.DistanceForStrings([]rune(text), []rune(pattern), levenshtein.DefaultOptions)
-	println(dist)
-	length := len(pattern)
-	dist = length - dist
-	percentage := (float32(dist) / float32(length)) * 100
+	// println(dist)
+	textLength := len(text)
+	patternLength := len(pattern)
+	totalLength := textLength + patternLength
+	dist = totalLength - dist
+	percentage := (float32(dist) / float32(totalLength)) * 100
 	return percentage
 }
 
