@@ -1,4 +1,4 @@
-package main
+package src
 
 func kmpMatch(text string, pattern string) int {
 	n := len(text)
@@ -49,8 +49,8 @@ func computeBorder(pattern string) []int {
 	return b
 }
 
-func main() {
-	text := "apakah anda suka"
-	pattern := "anda suka"
-	println(kmpMatch(text, pattern))
-}
+// func main() {
+// 	text := "apakah anda suka"
+// 	pattern := "anda suka"
+// 	println(kmpMatch(text, pattern))
+// }
