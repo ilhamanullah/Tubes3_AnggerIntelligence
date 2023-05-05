@@ -6,7 +6,7 @@ import (
 
 func getVal(calculator string) string {
 
-	calRegex := regexp.MustCompile(`^([0-9]+)(\+|\-|\*|\/)([0-9]+)*$`)
+	calRegex := regexp.MustCompile(`^\s*\d+\s*([-+*\/\^]\s*\d+\s*)*\s*$`)
 	validate := calRegex.MatchString(calculator)
 	if validate {
 		return "String input valid"

@@ -10,7 +10,7 @@ package src
 // 	}
 
 // 	regex := regexp.MustCompile(`^([^\(\)]*|\(([^()]|\(([^()]|\([^()]*\))*\))*\))*$`)
-// 	// \s*\d+\s*([-+*\/\^]\s*\d+\s*)*\s*
+// \s*\d+\s*([-+*\/\^]\s*\d+\s*)*\s*
 // 	for _, expr := range expressions {
 // 		if regex.MatchString(expr) {
 // 			fmt.Printf("%s is a valid expression\n", expr)

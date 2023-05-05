@@ -1,14 +1,14 @@
 package src
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 
 	"backend/src/database"
 
+	"database/sql"
+
 	"github.com/gin-gonic/gin"
-	// "gorm.io/gorm"
 )
 
 func Index(c *gin.Context) {
@@ -22,8 +22,36 @@ func Index(c *gin.Context) {
 
 func Show(c *gin.Context) {
 	// var product database.Product
+	db, _ := sql.Open("mysql", "root:angger123@tcp(localhost:3306)/tubesStima")
 	id := c.Param("pertanyaan")
 	fmt.Print(id)
+	var isUpdate bool
+	var cek string
+	cek, isUpdate = addPertanyaan(id, db)
+	if cek != "" {
+		if isUpdate {
+			c.JSON(http.StatusOK, gin.H{"message": "Pertanyaan berhasil diupdate"})
+		} else {
+
+		}
+
+	} else {
+
+	}
+
+	// answer = getDay(id)
+	// if(answer != "String input tidak valid"){
+	// 	c.JSON(http.StatusOK, gin.H{"product": answer})
+	// }
+	// else{
+	// 	// answer = calculator
+	// 	// if(answer calculator){
+
+	// 	// }
+	// 	else {
+
+	// 	}
+	// }
 
 	// if err := database.DB.First(&product, id).Error; err != nil {
 	// 	switch err {
@@ -36,58 +64,57 @@ func Show(c *gin.Context) {
 	// 	}
 	// }
 
-	c.JSON(http.StatusOK, gin.H{"product": "asd"})
 }
 
-func Create(c *gin.Context) {
+// func Create(c *gin.Context) {
 
-	var product database.Product
+// 	var product database.Product
 
-	if err := c.ShouldBindJSON(&product); err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-		return
-	}
+// 	if err := c.ShouldBindJSON(&product); err != nil {
+// 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+// 		return
+// 	}
 
-	database.DB.Create(&product)
-	c.JSON(http.StatusOK, gin.H{"product": product})
-}
+// 	database.DB.Create(&product)
+// 	c.JSON(http.StatusOK, gin.H{"product": product})
+// }
 
-func Update(c *gin.Context) {
-	var product database.Product
-	id := c.Param("id")
+// func Update(c *gin.Context) {
+// 	var product database.Product
+// 	id := c.Param("id")
 
-	if err := c.ShouldBindJSON(&product); err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-		return
-	}
+// 	// if err := c.ShouldBindJSON(&product); err != nil {
+// 	// 	c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+// 	// 	return
+// 	// }
 
-	if database.DB.Model(&product).Where("id = ?", id).Updates(&product).RowsAffected == 0 {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "tidak dapat mengupdate product"})
-		return
-	}
+// 	// if database.DB.Model(&product).Where("id = ?", id).Updates(&product).RowsAffected == 0 {
+// 	// 	c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "tidak dapat mengupdate product"})
+// 	// 	return
+// 	// }
 
-	c.JSON(http.StatusOK, gin.H{"message": "Data berhasil diperbarui"})
+// 	c.JSON(http.StatusOK, gin.H{"message": "Data berhasil diperbarui"})
 
-}
+// }
 
-func Delete(c *gin.Context) {
+// func Delete(c *gin.Context) {
 
-	var product database.Product
+// 	var product database.Product
 
-	var input struct {
-		Id json.Number
-	}
+// 	var input struct {
+// 		Id json.Number
+// 	}
 
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
-		return
-	}
+// 	if err := c.ShouldBindJSON(&input); err != nil {
+// 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": err.Error()})
+// 		return
+// 	}
 
-	id, _ := input.Id.Int64()
-	if database.DB.Delete(&product, id).RowsAffected == 0 {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Tidak dapat menghapus product"})
-		return
-	}
+// 	id, _ := input.Id.Int64()
+// 	if database.DB.Delete(&product, id).RowsAffected == 0 {
+// 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"message": "Tidak dapat menghapus product"})
+// 		return
+// 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Data berhasil dihapus"})
-}
+// 	c.JSON(http.StatusOK, gin.H{"message": "Data berhasil dihapus"})
+// }

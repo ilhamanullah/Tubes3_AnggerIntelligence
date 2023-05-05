@@ -16,9 +16,9 @@ func main() {
 
 	r.GET("/api/products", src.Index)
 	r.GET("/api/product/*pertanyaan", src.Show)
-	r.POST("/api/product", src.Create)
-	r.PUT("/api/product/:id", src.Update)
-	r.DELETE("/api/product", src.Delete)
+	// r.POST("/api/product", src.Create)
+	// r.PUT("/api/product/:id", src.Update)
+	// r.DELETE("/api/product", src.Delete)
 
 	// r.GET("/", func(c *gin.Context) {
 	// 	c.File("../frontend/src/tes.html")

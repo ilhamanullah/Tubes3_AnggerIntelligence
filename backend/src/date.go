@@ -56,7 +56,7 @@ func getDay(dateString string) string {
 		if bulan == 2 {
 			if tahun%4 == 0 && (tahun%100 != 0 || tahun%400 == 0) {
 				if hari > 29 {
-					return "String input tidak valid 1"
+					return "String input tidak valid"
 				}
 			} else {
 				if hari > 28 {
