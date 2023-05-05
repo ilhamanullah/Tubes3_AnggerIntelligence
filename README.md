@@ -31,6 +31,7 @@ Program ini merupakan program web chatbot dengan mengimplementasikan algoritma p
 
 ## How to Run
 1. Clone this repository to your computer
+2. Change the MySQL username and password in ```setup.go``` and ```controller.go``` to yours
 2. Run backend using 
 ```
 cd backend
