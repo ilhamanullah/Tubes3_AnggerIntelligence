@@ -1,9 +1,7 @@
-package main
+package src
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"regexp"
 	"strconv"
 )
@@ -80,11 +78,11 @@ func getDay(dateString string) string {
 	}
 }
 
-func main() {
-	//make string input
-	var date string
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	date = scanner.Text()
-	fmt.Println(getDay(date))
-}
+// func main() {
+// 	//make string input
+// 	var date string
+// 	scanner := bufio.NewScanner(os.Stdin)
+// 	scanner.Scan()
+// 	date = scanner.Text()
+// 	fmt.Println(getDay(date))
+// }

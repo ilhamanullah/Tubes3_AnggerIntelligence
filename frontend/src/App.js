@@ -3,6 +3,7 @@ import logo from './pngfile/logo.png';
 import textlogo from './pngfile/textlogo.png';
 import texthistory from './pngfile/textHistory.png';
 import './App.css';
+import axios from 'axios';
 
 function App() {
   
@@ -42,10 +43,13 @@ function App() {
 
   const [messages, setMessages] = useState([]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (text !== "") {
       setMessages([...messages, text]);
       setText("");
+      const response = await axios.get(`http://localhost:8000/api/product/${text}`);
+      const jaw = response.data.product;
+      console.log(jaw);
     }
   }
   return (
@@ -97,16 +101,18 @@ function App() {
           value={text}
           onChange={handleTextChange}
           placeholder="Type your text here"
-
-        />
-      {/* <p>You typed: {text}</p> */}
+          
+          />
+      {/* <p>You typed: {text}</p> */
+          // console.log({text})
+      }
       </label>
       <button className="send" style={{top: "740px"}} onClick={handleSend}> Send</button>
       
       <div className = "chat-container" style={{ overflowY: "scroll" }}>
       <div className="chatbox">
         {messages.map((message, index) => (
-        <div key={index} className="chat-bubble" onClick={() => console.log(`Clicked on message ${index}`)}>
+        <div key={index} className="chat-bubble">
           {message}
         </div>
         ))}

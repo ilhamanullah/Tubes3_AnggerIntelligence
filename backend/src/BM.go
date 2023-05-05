@@ -1,4 +1,4 @@
-package main
+package src
 
 func min(a int, b int) int {
 	if a < b {
@@ -51,8 +51,8 @@ func bmMatch(text string, pattern string) int {
 	return -1
 }
 
-func main() {
-	text := "ibukota indonesia"
-	pattern := "kota indonesia"
-	println(bmMatch(text, pattern))
-}
+// func main() {
+// 	text := "ibukota indonesia"
+// 	pattern := "kota indonesia"
+// 	println(bmMatch(text, pattern))
+// }
