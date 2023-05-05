@@ -4,20 +4,38 @@ import (
 	"fmt"
 	"net/http"
 
-	"backend/src/database"
-
 	"database/sql"
 
 	"github.com/gin-gonic/gin"
 )
 
-func Index(c *gin.Context) {
+// func Index(c *gin.Context) {
 
-	var products []database.Product
+// 	var products []database.Product
 
-	database.DB.Find(&products)
-	c.JSON(http.StatusOK, gin.H{"products": products})
+// 	database.DB.Find(&products)
+// 	c.JSON(http.StatusOK, gin.H{"products": products})
 
+// }
+var isKmp bool
+
+func AlgoOption(c *gin.Context) {
+	fmt.Println("halo")
+	type Algo struct {
+		Value string `json:"value"`
+	}
+	var algo Algo
+	if err := c.ShouldBindJSON(&algo); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	fmt.Println(algo.Value)
+	if algo.Value == "Option 1" {
+		isKmp = true
+	} else if algo.Value == "Option 2" {
+		isKmp = false
+	}
+	fmt.Println("hal00o")
 }
 
 func Show(c *gin.Context) {
@@ -25,19 +43,39 @@ func Show(c *gin.Context) {
 	db, _ := sql.Open("mysql", "root:angger123@tcp(localhost:3306)/tubesStima")
 	var id string
 	id = c.Param("pertanyaan")
-	// fmt.Println("================")
-	// fmt.Println(id)
-	var isUpdate bool
+	// var isKmp bool
+	isKmp = true
 	var cek string
-	cek, isUpdate = AddPertanyaan(id, db)
-	fmt.Println(cek)
+
+	cek = AddPertanyaan(id, db) // add/update pertanyaan
+	// fmt.Println("1")
 	if cek != "" {
-		if isUpdate {
+		c.JSON(http.StatusOK, gin.H{"product": cek})
+	} else {
+		cek = hapusPertanyaan(id, db) // del pertanyaan
+		// fmt.Println("2")
+		if cek != "" {
 			c.JSON(http.StatusOK, gin.H{"product": cek})
 		} else {
-			c.JSON(http.StatusOK, gin.H{"product": cek})
+			cek = getDay(id) // cek hari
+			// fmt.Println("3")
+			if cek != "String input tidak valid" {
+				c.JSON(http.StatusOK, gin.H{"product": cek})
+			} else {
+				cek = getVal(id)
+				println(id)
+				println(cek)
+				println("qwer")
+				if cek != "" {
+					c.JSON(http.StatusOK, gin.H{"product": cek})
+				} else {
+					cek = findJawaban(id, db, isKmp)
+					if cek != "" {
+						c.JSON(http.StatusOK, gin.H{"product": cek})
+					}
+				}
+			}
 		}
-
 	}
 	// answer := getDay(id)
 	// if answer != "String input tidak valid" {

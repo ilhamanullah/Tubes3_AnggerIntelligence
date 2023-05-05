@@ -14,8 +14,9 @@ func main() {
 	database.ConnectDatabase()
 	r.Use(cors.Default())
 
-	r.GET("/api/products", src.Index)
+	// r.GET("/api/products", src.Index)
 	r.GET("/api/product/*pertanyaan", src.Show)
+	r.POST("/api/algooption", src.AlgoOption)
 	// r.POST("/api/product", src.Create)
 	// r.PUT("/api/product/:id", src.Update)
 	// r.DELETE("/api/product", src.Delete)

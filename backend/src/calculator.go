@@ -1,10 +1,8 @@
-package main
+package src
 
 import (
-	"bufio"
 	"fmt"
 	"math"
-	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -88,7 +86,8 @@ func isKurang(input string) bool {
 	return false
 }
 
-func getVal(calculator string) float64 {
+func getVal(calculator string) string {
+	calculator = calculator[1:]
 
 	calRegex := regexp.MustCompile(`^\s*\d+\s*([-+*\/\^]\s*\d+\s*)*\s*$`)
 	validate := calRegex.MatchString(calculator)
@@ -387,17 +386,19 @@ func getVal(calculator string) float64 {
 
 		}
 
+		// hasil, _ := strconv.ParseFloat(calculator, 8)
+		return calculator
 	}
+	return ""
 
 	// fmt.Println(calculator)
-	hasil, _ := strconv.ParseFloat(calculator, 8)
-	return hasil
 }
 
-func main() {
-	var calculator string
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	calculator = scanner.Text()
-	fmt.Println(getVal(calculator))
-}
+// func main() {
+// 	var calculator string
+// 	scanner := bufio.NewScanner(os.Stdin)
+// 	scanner.Scan()
+// 	calculator = scanner.Text()
+// 	fmt.Print(getVal(calculator))
+// 	fmt.Println("dsadsa")
+// }

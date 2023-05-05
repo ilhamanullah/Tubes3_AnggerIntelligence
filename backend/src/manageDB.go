@@ -6,8 +6,8 @@ import (
 	"regexp"
 )
 
-func AddPertanyaan(str string, db *sql.DB) (string, bool) {
-	pattern := `[t|T]ambahkan pertanyaan\s*(.+)\s*dengan jawaban\s*(.+)\s*`
+func AddPertanyaan(str string, db *sql.DB) string {
+	pattern := `[t|T]ambahkan pertanyaan (.+) dengan jawaban (.+)`
 
 	// Compile the regex pattern
 	re := regexp.MustCompile(pattern)
@@ -16,7 +16,7 @@ func AddPertanyaan(str string, db *sql.DB) (string, bool) {
 	matches := re.FindStringSubmatch(str)
 
 	if len(matches) == 0 {
-		return "", false
+		return ""
 	} else {
 		isUpdate := false
 		x := matches[1]
@@ -33,15 +33,53 @@ func AddPertanyaan(str string, db *sql.DB) (string, bool) {
 
 		if isUpdate {
 			db.Query("UPDATE PRODUCTS SET JAWABAN = ? WHERE PERTANYAAN = ?", y, x)
-			return "Pertanyaan " + x + " sudah ada! jawaban diupdate ke " + y, true
+			return "Pertanyaan " + x + " sudah ada! jawaban diupdate ke " + y
 
 		} else {
 			db.Query("INSERT INTO PRODUCTS (PERTANYAAN, JAWABAN) VALUES (?, ?)", x, y)
-			return "Pertanyaan " + x + " telah ditambah", false
+			return "Pertanyaan " + x + " telah ditambah"
 		}
 	}
 }
 
-// func hapusPertanyaan(str string) {
+func hapusPertanyaan(str string, db *sql.DB) string {
+	pattern := `[H|h]apus pertanyaan (.+)`
 
-// }
+	// Compile the regex pattern
+	re := regexp.MustCompile(pattern)
+
+	// Find the matching X and Y substrings
+	matches := re.FindStringSubmatch(str)
+
+	if len(matches) == 0 {
+		return ""
+	} else {
+		x := matches[1]
+		conn, _ := db.Query("SELECT PERTANYAAN FROM PRODUCTS")
+		for conn.Next() {
+			var q database.Product
+			conn.Scan(&q.Pertanyaan)
+			// fmt.Print(q.Pertanyaan)
+			// fmt.Println("++++++++")
+			if q.Pertanyaan == x {
+				db.Query("DELETE FROM PRODUCTS WHERE PERTANYAAN = ?", x)
+				return "Pertanyaan " + x + " telah dihapus"
+			}
+		}
+		return "Tidak ada pertanyaan " + x + " pada database"
+	}
+}
+
+func findJawaban(str string, db *sql.DB, isKmp bool) string {
+	conn, _ := db.Query("SELECT PERTANYAAN, JAWABAN FROM PRODUCTS")
+	str = str[1:]
+	for conn.Next() {
+		var q database.Product
+		conn.Scan(&q.Pertanyaan, &q.Jawaban)
+		if q.Pertanyaan == str {
+			return q.Jawaban
+			conn, _ = db.Query("SELECT JAWABAN FROM PRODUCTS WHERE PERTANYAAN = ?", str)
+		}
+	}
+	return "Masukan tidak diketahui"
+}

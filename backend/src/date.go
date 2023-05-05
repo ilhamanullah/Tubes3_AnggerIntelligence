@@ -10,7 +10,8 @@ func getDay(dateString string) string {
 
 	dateRegex := regexp.MustCompile(`([0-2][0-9]|[1-9]|[3][0-1])(\/)(((0)[1-9])|((1)[0-2])|[1-9])(\/)\d{4}`)
 	validate := dateRegex.MatchString(dateString)
-	Tanggal := dateRegex.FindAllString(dateString, -1)[0]
+
+	Tanggal := dateRegex.FindAllString(dateString, -1)
 	fmt.Println(Tanggal)
 
 	var dayString, monthString, yearString string
@@ -20,6 +21,7 @@ func getDay(dateString string) string {
 		   kasus 3 : 9/2/2023
 	       kasus 4 : 9/02/2023*/
 	if validate {
+		Tanggal := Tanggal[0]
 		fmt.Println("String input valid")
 		if Tanggal[2] == '/' {
 			if Tanggal[5] == '/' {

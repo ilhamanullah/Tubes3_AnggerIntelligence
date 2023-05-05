@@ -33,8 +33,11 @@ function App() {
   
   const [selectedOption, setSelectedOption] = useState("");
 
-  const handleOptionChange = (option) => {
+  const handleOptionChange = async (option) => {
     setSelectedOption(option);
+    console.log(option);
+    const algooption = await axios.post(`http://localhost:8000/api/algooption`, {"value":algooption});
+    console.log(algooption);
   };
   
   const [text, setText] = useState('');
