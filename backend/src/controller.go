@@ -23,24 +23,24 @@ func Index(c *gin.Context) {
 func Show(c *gin.Context) {
 	// var product database.Product
 	db, _ := sql.Open("mysql", "root:angger123@tcp(localhost:3306)/tubesStima")
-	id := c.Param("pertanyaan")
-	fmt.Print(id)
+	var id string
+	id = c.Param("pertanyaan")
+	// fmt.Println("================")
+	// fmt.Println(id)
 	var isUpdate bool
 	var cek string
-	cek, isUpdate = addPertanyaan(id, db)
+	cek, isUpdate = AddPertanyaan(id, db)
+	fmt.Println(cek)
 	if cek != "" {
 		if isUpdate {
-			c.JSON(http.StatusOK, gin.H{"message": "Pertanyaan berhasil diupdate"})
+			c.JSON(http.StatusOK, gin.H{"product": cek})
 		} else {
-
+			c.JSON(http.StatusOK, gin.H{"product": cek})
 		}
 
-	} else {
-
 	}
-
-	// answer = getDay(id)
-	// if(answer != "String input tidak valid"){
+	// answer := getDay(id)
+	// if answer != "String input tidak valid" {
 	// 	c.JSON(http.StatusOK, gin.H{"product": answer})
 	// }
 	// else{

@@ -1,8 +1,4 @@
-package main
-
-import (
-	"fmt"
-)
+package src
 
 func minimum(a int, b int, c int) int {
 	if a < b && a < c {
@@ -62,9 +58,9 @@ func distance(text string, pattern string) float32 {
 	return percentage
 }
 
-func main() {
-	s1 := "siapa presiden indonesia sekarang"
-	s2 := "siapa presiden indonesia saat ini"
-	per1 := distance(s1, s2)
-	fmt.Printf("Persentase kesamaan antara '%s' dan '%s' adalah %.2f%%.\n", s1, s2, per1)
-}
+// func main() {
+// 	s1 := "siapa presiden indonesia sekarang"
+// 	s2 := "siapa presiden indonesia saat ini"
+// 	per1 := distance(s1, s2)
+// 	fmt.Printf("Persentase kesamaan antara '%s' dan '%s' adalah %.2f%%.\n", s1, s2, per1)
+// }

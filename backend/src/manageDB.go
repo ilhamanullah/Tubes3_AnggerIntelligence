@@ -6,8 +6,8 @@ import (
 	"regexp"
 )
 
-func addPertanyaan(str string, db *sql.DB) (string, bool) {
-	pattern := `Tambahkan pertanyaan\s*(.+)\s*dengan jawaban\s*(.+)\s*`
+func AddPertanyaan(str string, db *sql.DB) (string, bool) {
+	pattern := `[t|T]ambahkan pertanyaan\s*(.+)\s*dengan jawaban\s*(.+)\s*`
 
 	// Compile the regex pattern
 	re := regexp.MustCompile(pattern)
@@ -24,20 +24,20 @@ func addPertanyaan(str string, db *sql.DB) (string, bool) {
 		conn, _ := db.Query("SELECT PERTANYAAN FROM PRODUCTS")
 		for conn.Next() {
 			var q database.Product
-			// conn.scan(&q.Pertanyaan)
+			conn.Scan(&q.Pertanyaan)
 			if q.Pertanyaan == x {
 				isUpdate = true
 				break
 			}
 		}
 
-		if isUpdate == true {
+		if isUpdate {
 			db.Query("UPDATE PRODUCTS SET JAWABAN = ? WHERE PERTANYAAN = ?", y, x)
-			return "Pertanyaan" + x + "sudah ada!" + "jawaban diupdate ke " + y, true
+			return "Pertanyaan " + x + " sudah ada! jawaban diupdate ke " + y, true
 
 		} else {
 			db.Query("INSERT INTO PRODUCTS (PERTANYAAN, JAWABAN) VALUES (?, ?)", x, y)
-			return "Pertanyaan" + x + "telah ditambah", false
+			return "Pertanyaan " + x + " telah ditambah", false
 		}
 	}
 }

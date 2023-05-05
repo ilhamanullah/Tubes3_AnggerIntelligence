@@ -5,6 +5,8 @@ import texthistory from './pngfile/textHistory.png';
 import './App.css';
 import axios from 'axios';
 
+const botmessage = []
+
 function App() {
   
   const bgcolor = {
@@ -42,6 +44,7 @@ function App() {
   };
 
   const [messages, setMessages] = useState([]);
+  // const [botmessages, setBotMessages] = useState([]);
 
   const handleSend = async () => {
     if (text !== "") {
@@ -50,7 +53,8 @@ function App() {
       const response = await axios.get(`http://localhost:8000/api/product/${text}`);
       const jaw = response.data.product;
       console.log(jaw);
-      setMessages([...messages, { type: "bot", text: jaw }]); // add bot message
+      botmessage.push(jaw);
+      // setBotMessages([...botmessages, { type: "bot", text: jaw }]); // add bot message
     }
   }
 
@@ -119,11 +123,12 @@ function App() {
       
       <div className = "chat-container" style={{ overflowY: "scroll" }}>
       <div className="chatbox">
+        
         {messages.map((message, index) => {
             return (
               <React.Fragment key={index}>
                 <div className="chat-bubble chat-bubble-user">{message}</div>
-                <div className="chat-bubble">{"halo"}</div>
+                <div className="chat-bubble">{botmessage[index]}</div>
                 
               </React.Fragment>
             );
