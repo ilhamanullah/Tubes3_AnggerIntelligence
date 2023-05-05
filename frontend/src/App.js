@@ -36,7 +36,7 @@ function App() {
   const handleOptionChange = async (option) => {
     setSelectedOption(option);
     console.log(option);
-    const algooption = await axios.post(`http://localhost:8000/api/algooption`, {"value":algooption});
+    const algooption = await axios.post(`http://localhost:8000/api/algooption`, {"value":option});
     console.log(algooption);
   };
   

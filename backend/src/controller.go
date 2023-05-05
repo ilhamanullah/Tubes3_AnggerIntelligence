@@ -1,7 +1,6 @@
 package src
 
 import (
-	"fmt"
 	"net/http"
 
 	"database/sql"
@@ -29,7 +28,7 @@ func AlgoOption(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	fmt.Println(algo.Value)
+	// fmt.Println(algo.Value)
 	if algo.Value == "Option 1" {
 		isKmp = true
 	} else if algo.Value == "Option 2" {
