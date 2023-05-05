@@ -155,8 +155,8 @@ input[type="radio"]:checked + .radio-style::before {
   cursor: pointer;
   font-family: 'Poppins';
   top : 50px;
-  left : 310px;
-  max-width: 76%;
+  /* left : 310px; */
+  /* max-width: 76%; */
   max-inline-size: 76%;
   padding: 8px;
   border-radius: 10px;
@@ -166,6 +166,10 @@ input[type="radio"]:checked + .radio-style::before {
   margin-top: 10px;
   font-size: 20px;
   word-wrap: break-word;
+  height: auto;
+  width: max-content;
+  overflow-wrap: break-word;
+  text-align: left;
 }
 
 .chat-bubble::before {
@@ -185,12 +189,28 @@ input[type="radio"]:checked + .radio-style::before {
   flex-direction: column;
   height: 700px;
   top : 50px;
-  left : 500px;
+  margin-left:310px;
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   overflow-wrap: break-word;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
 
+.chat-bubble-user {
+  align-self: flex-end;
+  background-color: #F9A826;
+  color: #fff;
+  height: auto;
+  width:max-content;
+  margin-right: 30px;
+  margin-left: auto;
+}
+
+.chat-bubble-user::before {
+  border-width: 0 0 10px 10px;
+  border-color: transparent transparent #F9A826 transparent;
+  left: auto;
+  right: 0;
 }

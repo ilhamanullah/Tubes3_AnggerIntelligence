@@ -50,8 +50,16 @@ function App() {
       const response = await axios.get(`http://localhost:8000/api/product/${text}`);
       const jaw = response.data.product;
       console.log(jaw);
+      setMessages([...messages, { type: "bot", text: jaw }]); // add bot message
     }
   }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSend();
+    }
+  };
+
   return (
     <div style = {bgcolor}> 
       <div style = {sidebar}>
@@ -101,7 +109,7 @@ function App() {
           value={text}
           onChange={handleTextChange}
           placeholder="Type your text here"
-          
+          onKeyDown={handleKeyDown}
           />
       {/* <p>You typed: {text}</p> */
           // console.log({text})
@@ -111,12 +119,16 @@ function App() {
       
       <div className = "chat-container" style={{ overflowY: "scroll" }}>
       <div className="chatbox">
-        {messages.map((message, index) => (
-        <div key={index} className="chat-bubble">
-          {message}
-        </div>
-        ))}
-        </div>
+        {messages.map((message, index) => {
+            return (
+              <React.Fragment key={index}>
+                <div className="chat-bubble chat-bubble-user">{message}</div>
+                <div className="chat-bubble">{"halo"}</div>
+                
+              </React.Fragment>
+            );
+        })}
+      </div>
       </div>
     </div>
   );
