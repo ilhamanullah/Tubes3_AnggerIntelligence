@@ -37,7 +37,7 @@ Program ini merupakan program web chatbot dengan mengimplementasikan algoritma p
 cd backend
 go run mainn.go
 ```
-3. Run frontend using
+4. Run frontend using
  ```
  cd frontend
  npm start
