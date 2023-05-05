@@ -1,7 +1,6 @@
 package src
 
 import (
-	"fmt"
 	"net/http"
 
 	"database/sql"
@@ -20,7 +19,7 @@ import (
 var isKmp bool
 
 func AlgoOption(c *gin.Context) {
-	fmt.Println("halo")
+	// fmt.Println("halo")
 	type Algo struct {
 		Value string `json:"value"`
 	}
@@ -29,13 +28,13 @@ func AlgoOption(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	fmt.Println(algo.Value)
+	// fmt.Println(algo.Value)
 	if algo.Value == "Option 1" {
 		isKmp = true
 	} else if algo.Value == "Option 2" {
 		isKmp = false
 	}
-	fmt.Println("hal00o")
+	// fmt.Println("hal00o")
 }
 
 func Show(c *gin.Context) {
@@ -65,7 +64,7 @@ func Show(c *gin.Context) {
 				cek = getVal(id)
 				println(id)
 				println(cek)
-				println("qwer")
+				// println("qwer")
 				if cek != "" {
 					c.JSON(http.StatusOK, gin.H{"product": cek})
 				} else {

@@ -21,6 +21,7 @@ Program ini merupakan program web chatbot dengan mengimplementasikan algoritma p
 - HTML
 - CSS
 - Figma
+- npm package
 
 ## Features
 - Fitur pertanyaan teks
