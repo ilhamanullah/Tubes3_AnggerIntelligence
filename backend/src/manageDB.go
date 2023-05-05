@@ -71,15 +71,56 @@ func hapusPertanyaan(str string, db *sql.DB) string {
 }
 
 func findJawaban(str string, db *sql.DB, isKmp bool) string {
+	if isKmp {
+		// fmt.Println("KMP")
+		conn, _ := db.Query("SELECT PERTANYAAN, JAWABAN FROM PRODUCTS")
+		str = str[1:]
+		for conn.Next() {
+			var q database.Product
+			conn.Scan(&q.Pertanyaan, &q.Jawaban)
+			if kmpMatch(q.Pertanyaan, str) == 0 {
+				return q.Jawaban
+				conn, _ = db.Query("SELECT JAWABAN FROM PRODUCTS WHERE PERTANYAAN = ?", str)
+			}
+		}
+		for conn.Next() {
+			var q database.Product
+			conn.Scan(&q.Pertanyaan, &q.Jawaban)
+			if distance(q.Pertanyaan, str) >= 90 {
+				return q.Jawaban
+				conn, _ = db.Query("SELECT JAWABAN FROM PRODUCTS WHERE PERTANYAAN = ?", str)
+			}
+		}
+	} else {
+		// fmt.Println("BM")
+		conn, _ := db.Query("SELECT PERTANYAAN, JAWABAN FROM PRODUCTS")
+		str = str[1:]
+		for conn.Next() {
+			var q database.Product
+			conn.Scan(&q.Pertanyaan, &q.Jawaban)
+			if bmMatch(q.Pertanyaan, str) == 0 {
+				return q.Jawaban
+				conn, _ = db.Query("SELECT JAWABAN FROM PRODUCTS WHERE PERTANYAAN = ?", str)
+			}
+		}
+		for conn.Next() {
+			var q database.Product
+			conn.Scan(&q.Pertanyaan, &q.Jawaban)
+			if distance(q.Pertanyaan, str) >= 90 {
+				return q.Jawaban
+				conn, _ = db.Query("SELECT JAWABAN FROM PRODUCTS WHERE PERTANYAAN = ?", str)
+			}
+		}
+	}
 	conn, _ := db.Query("SELECT PERTANYAAN, JAWABAN FROM PRODUCTS")
-	str = str[1:]
+	var s string
+	s = "Pertanyaan tidak ditemukan di database.Apakah maksud anda : "
 	for conn.Next() {
 		var q database.Product
 		conn.Scan(&q.Pertanyaan, &q.Jawaban)
-		if q.Pertanyaan == str {
-			return q.Jawaban
-			conn, _ = db.Query("SELECT JAWABAN FROM PRODUCTS WHERE PERTANYAAN = ?", str)
+		if distance(q.Pertanyaan, str) >= 40 {
+			s += q.Pertanyaan + ", "
 		}
 	}
-	return "Masukan tidak diketahui"
+	return s
 }
